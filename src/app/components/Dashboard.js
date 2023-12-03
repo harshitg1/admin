@@ -17,6 +17,7 @@ import {
 import { RiDeleteBin7Line } from "react-icons/ri";
 import { TbEdit } from "react-icons/tb";
 import axios from "axios";
+import { Fullscreen } from "@mui/icons-material";
 
 const DataTable = () => {
   const [data, setData] = useState([]);
@@ -81,8 +82,8 @@ const DataTable = () => {
   );
 
   return (
-    <div className="m-4 px-28 ">
-      <div className="flex pb-10 justify-between ">
+    <div className="m-4 md:px-28 ">
+      <div className="flex pb-10  justify-between ">
         <TextField
           label="Search"
           variant="outlined"
@@ -98,11 +99,11 @@ const DataTable = () => {
         </span>
       </div>
 
-      <TableContainer  component={Paper}>
+      <TableContainer component={Paper} >
         <Table>
           <TableHead>
-            <TableRow >
-              <TableCell className=" pl-6" >
+            <TableRow>
+              <TableCell className=" pl-6">
                 <FormControlLabel
                   control={
                     <Checkbox
@@ -111,17 +112,21 @@ const DataTable = () => {
                       color="primary"
                     />
                   }
-            
                 />
               </TableCell>
-              
+
               <TableCell>Name</TableCell>
               <TableCell>Role</TableCell>
               <TableCell>Email</TableCell>
               <TableCell>Action</TableCell>
             </TableRow>
           </TableHead>
-          <TableBody>
+          <TableBody
+            sx={{
+              width: 300,
+              color:'green'
+            }}
+          >
             {data
               .filter((row) =>
                 row.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -130,12 +135,11 @@ const DataTable = () => {
               .map((row) => (
                 <TableRow key={row.id} selected={isSelected(row.id, selected)}>
                   <TableCell>{renderCheckbox(row.id)}</TableCell>
-               
+
                   <TableCell>{row.name}</TableCell>
                   <TableCell>{row.email}</TableCell>
                   <TableCell>{row.role}</TableCell>
                   <TableCell>
-                 
                     <span className="border  py-2.5 rounded-lg">
                       <IconButton onClick={() => handleEditRow(row.id)}>
                         <TbEdit />
